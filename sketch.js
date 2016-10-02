@@ -1,16 +1,16 @@
 var rocx = 250;
 var rocy = 80;
+var rocxspeed = 5;
+var rocyspeed = 8;
 var x;
 var y;
-var rocxspeed = 8;
-var rocyspeed = 5;
+
 
 var step = 0
 var stepY;
 var vel = 1;
 var acc = 2;
 var rand = 0;
-
 
 var m = 0;
 var n = 0;
@@ -33,7 +33,6 @@ var PlanetE = {
     }
   } // declare shaking and going to explode planet : PlanetE 
 
-
 function setup() {
   createCanvas(600, 600);
   background(33, 42, 105);
@@ -46,6 +45,8 @@ function setup() {
 }
 
 function draw() {
+
+
   rocx = rocx + rocxspeed;
   rocy = rocy + rocyspeed;
 
@@ -56,7 +57,6 @@ function draw() {
   if ((rocy > width) || (rocy < 0)) {
     rocyspeed = rocyspeed * -1;
   }
-
   //rocket movement 
 
   background(33, 42, 105);
@@ -92,21 +92,6 @@ function draw() {
   // changing ligtening 
 
 
-  for (var angle = 0; angle < TWO_PI; angle += PI / 24.0) {
-    var newValue = map(sin(angle), -1, 1, 0, 500);
-    println(newValue);
-  }
-
-  noStroke();
-  fill(255);
-  for (var x = 0; x <= width; x += 5) {
-    var y = 120 + (sin(angle) * 35.0);
-    rect(x, y, 3, 4);
-    angle += PI / 40.0;
-  }
-
-  //White Curve Line 
-
   noFill();
   stroke(245, 166, 35);
   for (var d = 150; d > 0; d -= 10) {
@@ -121,7 +106,15 @@ function draw() {
 
   noStroke();
 
-  // Rocket:
+  WhiteCurveLine(100);
+  WhiteCurveLine(200);
+  WhiteCurveLine(300);
+  WhiteCurveLine(400);
+  WhiteCurveLine(500);
+  //White Curve Lines 
+
+
+  // Rocket
 
   fill(189, 16, 224);
   triangle(rocx, rocy, rocx + 50, rocy + 70, rocx - 50, rocy + 70);
@@ -150,7 +143,6 @@ function draw() {
   ellipse(rocx, rocy + 270, 20, 70);
   ellipse(rocx + 40, rocy + 270, 20, 70);
   // Fire!!!
-
 
   noStroke();
   fill(208, 2, 27);
@@ -186,9 +178,10 @@ function draw() {
   MrAlien(400, 350, 50);
   MrAlien(500, 390, 50); */
 
-  MrAlien(150 + step, 400 + stepY, 50);
-  MrAlien(330 + step, 300, 50);
-  MrAlien(500, 390 + stepY, 50);
+
+  MrAlien(150 + step, 400 + stepY, 50, 1);
+  MrAlien(330 + step, 300, 25, 0.75);
+  MrAlien(500, 390 + stepY, 70, 0.5);
   // call MrAlien out~~~
 
 
@@ -213,7 +206,7 @@ function draw() {
 
     if ((keyCode === LEFT_ARROW)) {
 
-      
+
       step -= 25;
       if (step < -280) {
         step = 600;
@@ -239,12 +232,14 @@ function draw() {
 
 }
 
-function MrAlien(xx, yy, diameter) {
+function MrAlien(xx, yy, diameter, s) {
+
+  scale(s);
 
   noStroke();
   fill(6, 254, 17);
-  rect(xx - 25, yy + 135, 20, 60);
-  rect(xx + 23, yy + 135, 20, 60);
+  rect(xx - 25, yy + 125, 20, 60);
+  rect(xx + 23, yy + 125, 20, 60);
 
   //MrAlien's Legs
 
@@ -259,12 +254,12 @@ function MrAlien(xx, yy, diameter) {
   //mouth
 
   fill(6, 254, 17);
-  rect(xx - 1, yy - 30, 5, 30);
+  rect(xx - 1, yy - 25, 5, 30);
   //little line on head
 
 
   fill(6, 254, 17);
-  ellipse(xx, yy - 50, diameter - 35, diameter - 35);
+  ellipse(xx - 1, yy - 45, diameter - 35, diameter - 35);
   //little tiny ball on head
 
   fill(6, 254, 17);
@@ -277,4 +272,58 @@ function MrAlien(xx, yy, diameter) {
   //eyes
 
 
-} // MrAlien!!!!!!!
+} // Function MrAlien!!!!!!!
+
+
+function WhiteCurveLine(L) {
+
+  for (var angle = 0; angle < TWO_PI; angle += PI / 24.0) {
+    var newValue = map(sin(angle), -1, 1, 0, 500);
+    //println(newValue);
+  }
+
+  noStroke();
+  fill(255);
+  for (x = 0; x <= width; x += 5) {
+    y = L + (sin(angle) * 35.0);
+    rect(x, y, 3, 4);
+    angle += PI / 40.0;
+  }
+  // Function WhiteCureLine
+
+
+}
+
+
+/*function Rocket(rocx, rocy) {
+
+  fill(189, 16, 224);
+  triangle(rocx, rocy, rocx + 50, rocy + 70, rocx - 50, rocy + 70);
+  //purple rocket head
+
+  fill(216, 216, 216);
+  rect(rocx, rocy + 145, 60, 150);
+  //grey rocket body
+
+  //fill(155, 155, 155);
+  fill(r, g, b, 70);
+  rect(rocx, rocy + 100, 40, 40);
+  // rocket window 
+
+  fill(216, 216, 216);
+  triangle(rocx + 30, rocy + 70, rocx + 50, rocy + 220, rocx, rocy + 220);
+  //right wing
+
+  fill(216, 216, 216);
+  triangle(rocx - 30, rocy + 70, rocx, rocy + 220, rocx - 50, rocy + 220);
+  //left wing 
+
+
+  fill(245, 81, 35);
+  ellipse(rocx - 40, rocy + 270, 20, 70);
+  ellipse(rocx, rocy + 270, 20, 70);
+  ellipse(rocx + 40, rocy + 270, 20, 70);
+  // Fire!!!
+
+
+}*/
