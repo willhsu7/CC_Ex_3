@@ -5,7 +5,6 @@ var rocyspeed = 8;
 var x;
 var y;
 
-
 var step = 0
 var stepY;
 var vel = 1;
@@ -19,13 +18,17 @@ var g = 0;
 var b = 0;
 
 var PlanetE = {
-    x: 300,
+    x: 470,
     y: 200,
     display: function() {
-      stroke(6, 66, 17);
-      strokeWeight(4);
+     
       fill(46, 232, 184);
-      ellipse(this.x, this.y, 45, 45);
+      ellipse(this.x, this.y, 150, 45);
+      ellipse(this.x, this.y-20, 70, 50 );
+      fill(6, 66, 17);
+      ellipse(this.x, this.y-20, 10, 10 );
+      ellipse(this.x-20, this.y-20, 10, 10 );
+      ellipse(this.x+20, this.y-20, 10, 10 );
     },
     move: function() {
       this.x = this.x + random(-5, 5);
@@ -34,7 +37,7 @@ var PlanetE = {
   } // declare shaking and going to explode planet : PlanetE 
 
 function setup() {
-  createCanvas(600, 600);
+  createCanvas(700, 600);
   background(33, 42, 105);
   rocx = width / 1.6
   rocy = height - 320;
@@ -46,25 +49,19 @@ function setup() {
 
 function draw() {
 
-
-  rocx = rocx + rocxspeed;
-  rocy = rocy + rocyspeed;
-
-  if ((rocx > width) || (rocx < 0)) {
-    rocxspeed = rocxspeed * -1;
-  }
-
-  if ((rocy > width) || (rocy < 0)) {
-    rocyspeed = rocyspeed * -1;
-  }
-  //rocket movement 
-
   background(33, 42, 105);
   noStroke();
   ellipseMode(CENTER);
   rectMode(CENTER);
 
   //Dark-Blue sky
+  
+  WhiteCurveLine(100);
+  WhiteCurveLine(200);
+  WhiteCurveLine(300);
+  WhiteCurveLine(400);
+  WhiteCurveLine(500);
+  //White Curve Lines 
 
   fill(r, g, b);
   rectMode(CENTER);
@@ -88,9 +85,8 @@ function draw() {
     if (b > 255) {
       b = 0;
     }
-  }
+  } 
   // changing ligtening 
-
 
   noFill();
   stroke(245, 166, 35);
@@ -106,13 +102,21 @@ function draw() {
 
   noStroke();
 
-  WhiteCurveLine(100);
-  WhiteCurveLine(200);
-  WhiteCurveLine(300);
-  WhiteCurveLine(400);
-  WhiteCurveLine(500);
-  //White Curve Lines 
+ 
+ 
+  rocx = rocx + rocxspeed;
+  rocy = rocy + rocyspeed;
 
+  if ((rocx > width) || (rocx < 0)) {
+    rocxspeed = rocxspeed * -1;
+  }
+
+  if ((rocy > width) || (rocy < 0)) {
+    rocyspeed = rocyspeed * -1;
+  } 
+  
+  //rocket movement
+ 
 
   // Rocket
 
@@ -153,6 +157,7 @@ function draw() {
   line(pmouseX, pmouseY, mouseX, mouseY);
 
   //Fire Ball 
+  
   fill(155);
   stroke(121, 97, 77);
   rect(x, y, random(20), random(50));
@@ -291,9 +296,7 @@ function WhiteCurveLine(L) {
   }
   // Function WhiteCureLine
 
-
 }
-
 
 /*function Rocket(rocx, rocy) {
 
